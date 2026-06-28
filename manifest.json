@@ -1,5 +1,6 @@
 {
-  "name": "Simulasi TKA SMP - Aplikasi ANBK",
+  "id": "/",
+  "name": "Simulasi TKA SMP",
   "short_name": "TKA SMP",
   "description": "Aplikasi simulasi Tes Kemampuan Akademik (TKA) untuk siswa SMP/MTs sederajat dalam persiapan ANBK",
   "start_url": ".",
