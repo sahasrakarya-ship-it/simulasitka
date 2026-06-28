@@ -1,0 +1,54 @@
+{
+  "name": "Simulasi TKA SMP - Aplikasi ANBK",
+  "short_name": "TKA SMP",
+  "description": "Aplikasi simulasi Tes Kemampuan Akademik (TKA) untuk siswa SMP/MTs sederajat dalam persiapan ANBK",
+  "start_url": ".",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#e5e7eb",
+  "theme_color": "#2870b4",
+  "dir": "ltr",
+  "lang": "id-ID",
+  "categories": ["education", "productivity"],
+  "screenshots": [
+    {
+      "src": "simulasitka.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "simulasitka.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "icons": [
+    {
+      "src": "simulasitka.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "simulasitka.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "simulasitka.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "simulasitka.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
