@@ -1,11 +1,13 @@
 // Service Worker untuk Simulasi TKA SMP
-const CACHE_NAME = 'simulasitka-cache-v2';
+const CACHE_NAME = 'simulasitka-cache-v3';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
   './simulasitka.png',
   './sertifikattka.jpg',
+  './wide-screenshot-laptop.png',
+  './wide-screenshot-tablet.png',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',

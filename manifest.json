@@ -1,5 +1,5 @@
 {
-  "id": "simulasitka",
+  "id": "./",
   "name": "Simulasi TKA SMP",
   "short_name": "TKA SMP",
   "description": "Aplikasi simulasi Tes Kemampuan Akademik (TKA) untuk siswa SMP/MTs sederajat dalam persiapan ANBK.",
@@ -12,16 +12,17 @@
   "dir": "ltr",
   "lang": "id-ID",
   "categories": ["education", "productivity"],
+  "prefer_related_applications": false,
   "screenshots": [
     {
-      "src": "wide-screenshot-laptop.png",
+      "src": "./wide-screenshot-laptop.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Antarmuka desktop simulasi TKA"
     },
     {
-      "src": "wide-screenshot-tablet.png",
+      "src": "./wide-screenshot-tablet.png",
       "sizes": "1536x1024",
       "type": "image/png",
       "form_factor": "wide",
@@ -30,19 +31,19 @@
   ],
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "./icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "./icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/maskable-icon.png",
+      "src": "./icons/maskable-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
