@@ -2,15 +2,38 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulasi CBT TKA SMP</title>
-    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Simulasi TKA SMP</title>
+    <meta name="description" content="Aplikasi simulasi Tes Kemampuan Akademik (TKA) untuk siswa SMP/MTs sederajat dalam persiapan ANBK.">
     <meta name="theme-color" content="#2870b4">
+    <meta name="application-name" content="SISMENDIK">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="simulasitka.png">
-    <link rel="icon" type="image/png" href="simulasitka.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="SISMENDIK">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index,follow">
+    <meta name="msapplication-TileColor" content="#2870b4">
+    <meta property="og:title" content="Simulasi TKA SMP">
+    <meta property="og:description" content="Aplikasi simulasi Tes Kemampuan Akademik (TKA) untuk siswa SMP/MTs sederajat dalam persiapan ANBK.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./simulasitka.png">
+    <meta property="og:image:alt" content="Logo Simulasi TKA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Simulasi TKA SMP">
+    <meta name="twitter:description" content="Aplikasi simulasi Tes Kemampuan Akademik (TKA) untuk siswa SMP/MTs sederajat dalam persiapan ANBK.">
+    <meta name="twitter:image" content="./simulasitka.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="shortcut icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
+    <link rel="canonical" href="./">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -259,7 +282,7 @@
                         </div>
                     </div>
 
-                    <p id="errorLogin" class="hidden text-red-600 text-xs font-bold text-center bg-red-50 py-2 rounded border border-red-200"><i class="fas fa-exclamation-circle"></i> Mohon lengkapi seluruh data isian.</p>
+                    <p id="errorLogin" class="hidden text-red-600 text-xs font-bold text-center bg-red-50 py-2 rounded border border-red-200" aria-live="polite"><i class="fas fa-exclamation-circle"></i> Mohon lengkapi seluruh data isian.</p>
                     
                     <button onclick="masukSistem()" class="w-full bg-[#2870b4] hover:bg-[#1f5a92] text-white font-bold py-3 rounded-lg transition-transform hover:scale-[1.02] mt-4 flex justify-center items-center gap-2 text-sm md:text-base shadow-md">
                         <i class="fas fa-play text-xs"></i> Mulai Simulasi
@@ -1379,40 +1402,50 @@
         // Manifest dimuat dari: manifest.json
         // Service Worker dimuat dari: sw.js
 
-        let deferredPrompt;
+        let deferredPrompt = null;
         const btnInstallPwa = document.getElementById('btnInstallPwa');
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            btnInstallPwa.classList.remove('hidden');
-            btnInstallPwa.classList.add('flex');
+            if (btnInstallPwa) {
+                btnInstallPwa.classList.remove('hidden');
+                btnInstallPwa.classList.add('flex');
+            }
         });
 
         async function installPWA() {
-            if (deferredPrompt) {
+            if (!deferredPrompt) {
+                return;
+            }
+
+            try {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
+                if (outcome === 'accepted' && btnInstallPwa) {
                     btnInstallPwa.classList.add('hidden');
                     btnInstallPwa.classList.remove('flex');
                 }
+            } finally {
                 deferredPrompt = null;
             }
         }
 
         window.addEventListener('appinstalled', () => {
-            btnInstallPwa.classList.add('hidden');
-            btnInstallPwa.classList.remove('flex');
+            if (btnInstallPwa) {
+                btnInstallPwa.classList.add('hidden');
+                btnInstallPwa.classList.remove('flex');
+            }
             deferredPrompt = null;
         });
 
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(() => console.log('[PWA] Service Worker berhasil diaktifkan.'))
-                .catch(err => console.error('[PWA] Gagal mendaftarkan Service Worker:', err));
-        }
+        window.addEventListener('load', () => {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js', { scope: './' })
+                    .then(() => console.log('[PWA] Service Worker berhasil diaktifkan.'))
+                    .catch(err => console.error('[PWA] Gagal mendaftarkan Service Worker:', err));
+            }
+        });
 
         // --- FITUR TOKEN POPUP DI HP SAAT KEYBOARD MUNCUL ---
         setTimeout(() => { 
